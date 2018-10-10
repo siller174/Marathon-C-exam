@@ -1,5 +1,5 @@
-#define FT_LIST
 # ifndef FT_LIST
+#define FT_LIST
 
 typedef struct    s_list
 {
