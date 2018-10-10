@@ -1,13 +1,13 @@
 #include <unistd.h>
 #include <stdio.h>
 
-void print_hex(int n)
+void	get_hex(int n)
 {
 	char hex[] = "0123456789abcdef";
 	write(1, &hex[n], 1);
 }
 
-int char_to_int(char *c)
+int		char_to_int(char *c)
 {
 	int i;
 	int res;
@@ -22,6 +22,39 @@ int char_to_int(char *c)
 	return (res);
 }
 
+int		ft_lenint(int c)
+{
+	int i;
+
+	i = 0;
+	while (c > 0)
+	{
+		c = c / 16;
+		i++;
+	}
+	return (i);
+}
+
+void	print_hex(int i)
+{
+	int res[ft_lenint(i)];
+	int x;
+
+	x = 0;
+	while (i > 0)
+	{
+		res[x] = (i % 16);
+		i = i / 16;
+		x++;
+	}
+	x = x - 1;
+	while (x > -1)
+	{
+		get_hex(res[x]);
+		x--;
+	}
+}
+
 int main(int argc, char **argv)
 {
 	int res;
@@ -32,9 +65,5 @@ int main(int argc, char **argv)
 		return (0);
 	}
 	res = char_to_int(argv[1]);
-	while (res > 0)
-	{
-		print_hex(res % 16);
-		res = res / 16;
-	}
+	print_hex(res);
 }
